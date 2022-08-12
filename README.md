@@ -11,9 +11,9 @@ The scripts are all in the `cuda-jit/` directory, whereas the sources need to go
     cd src; ./populate.sh; cd ..
  ```
  * We need to change the toplevel directory in the `cuda-jit/env.sh` file.
-   ```bash$
+ ```bash$
     cd cuda-jit
-   ```
+ ```
    now edit the file `env.sh` with your favourite editor. Replace the value of `TOPDIR_HIP` with the location
    of the current directory. A full path is recommended so you can source this ./env.sh script also in your run scipts.
  

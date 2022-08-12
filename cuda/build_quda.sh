@@ -1,5 +1,4 @@
 source ./env.sh
-
 pushd ${BUILDROOT} 
 if [ -d ./build_quda ];
 then
@@ -25,11 +24,9 @@ cmake ${SRCROOT}/quda \
   -DQUDA_FORCE_HISQ=OFF \
   -DQUDA_GAUGE_ALG=OFF \
   -DQUDA_GAUGE_TOOLS=OFF \
-  -DQUDA_QDPJIT=ON \
+  -DQUDA_QDPJIT=OFF \
   -DCUDAToolkit_ROOT=${CUDA_DIR} \
-  -DQDPXX_DIR=${INSTALLROOT}/qdpxx/lib/cmake/QDPXX \
-  -DLLVM_DIR=${INSTALLROOT}/llvm-13/lib/cmake/llvm \
-  -DQUDA_INTERFACE_QDPJIT=ON \
+  -DQUDA_INTERFACE_QDPJIT=OFF \
   -DQUDA_INTERFACE_MILC=OFF \
   -DQUDA_INTERFACE_CPS=OFF \
   -DQUDA_INTERFACE_QDP=ON \
@@ -55,6 +52,7 @@ cmake ${SRCROOT}/quda \
   -DQUDA_BUILD_ALL_TESTS=OFF \
   -DQUDA_CTEST_DISABLE_BENCHMARKS=OFF \
   -DCMAKE_SHARED_LINKER_FLAGS="-L${CUDA_DIR}/lib64"
+
 cmake --build . -j 32  -v
 cmake --install .
 

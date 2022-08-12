@@ -54,5 +54,5 @@ The general recommendation is to symbolic link from the build. I.e. to run Chrom
  ln -s PACKAGE_DIR/cuda-jit/env.sh .
  ln -s PACKAGE_DIR/cuda-jit/install/chroma/bin/chroma .
  ```
- where `RUNDIR` is the direcotry where you will be running, and `PACKAGE_DIR` is the top of this repository (containing the `cuda-jit` and `src` directories).
+ where `RUNDIR` is the directory where you will be running, and `PACKAGE_DIR` is the top of this repository (containing the `cuda-jit` and `src` directories).
  

@@ -15,6 +15,6 @@ The scripts are all in the `cuda-jit/` directory, whereas the sources need to go
     cd cuda-jit
  ```
    now edit the file `env.sh` with your favourite editor. Replace the value of `TOPDIR_HIP` with the location
-   of the current directory. A full path is recommended so you can source this ./env.sh script also in your run scipts.
+   of the current directory. A full path is recommended so you can source this  `env.sh` script also in your run scipts.
  
- Once this is done you should be able to build the code in the `cuda-jit/` directory.,
+ Once this is done you should be able to build the code.

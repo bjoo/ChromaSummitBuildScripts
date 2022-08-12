@@ -8,7 +8,7 @@ The scripts are all in the `cuda-jit/` directory, whereas the sources need to go
 ### Preliminaries
  * First, get the sources. The `populate.sh` script helps with that. 
  ```bash$
- cd src; ./populate.sh
+    cd src; ./populate.sh; cd ..
  ```
  * We need to change the toplevel directory in the `cuda-jit/env.sh` file.
    ```bash$

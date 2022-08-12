@@ -21,7 +21,7 @@ cmake ${SRCROOT}/qdp-jit -DQDP_PARALLEL_ARCH=parscalar \
        -DQDP_BUILD_EXAMPLES=OFF \
        -DQDP_ENABLE_LLVM14=OFF \
        -DQDP_ENABLE_COMM_SPLIT_DEVICEINIT=ON \
-			 -DQDP_PROP_OPT=OFF
+       -DQDP_PROP_OPT=ON
 
 
 cmake --build . -j 4  -v

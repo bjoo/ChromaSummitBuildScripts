@@ -14,7 +14,7 @@ fi
 mkdir  ./build_llvm_13
 pushd ./build_llvm_13
 
-cmake -G "Unix Makefiles" \
+cmake -G "Ninja" \
 -DCMAKE_CXX_COMPILER="g++" \
 -DCMAKE_CXX_LINK_FLAGS="-Wl,-rpath,${GCC_HOME}/lib64 -L${GCC_HOME}/lib64" \
 -DCMAKE_CXX_STANDARD=14 \
@@ -31,6 +31,6 @@ cmake -G "Unix Makefiles" \
 ${SRCROOT}/llvm-project/llvm
 
 
-make -j 32
-make -j 32 install
+cmake --build . -j 32
+cmake --install . 
 popd

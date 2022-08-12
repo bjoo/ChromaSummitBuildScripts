@@ -18,3 +18,27 @@ The scripts are all in the `cuda-jit/` directory, whereas the sources need to go
    of the current directory. A full path is recommended so you can source this  `env.sh` script also in your run scipts.
  
  Once this is done you should be able to build the code.
+ 
+### Building the Code
+In the `cuda-jit` directory are a variety of scripts. Essentially there is a script for building each software component which are in order...
+ * `env.sh` -- sets up the build environmnent (CUDA modules, Ninja build system etc. and sets the LD_LIBRARY_PATH to the to-be installed codes)
+ * `build_qmp.sh` -- builds QMP
+ * `build_llvm_13.sh` -- builds the LLVM library (currently using LLVM-13)
+ * `build_qdpxx.sh` -- builds QDP-JIT
+ * `build_quda.sh` -- builds QUDA (with Clover and DWF fermions)
+ * `build_chroma.sh` -- builds Chroma
+
+Each package will be built in a subdirectory of `cuda-jit/build` called `build_<packagename>/` (e.g. `cuda-jit/build/build_qmp`)
+and the packages themselves will be installed in `cuda-jit/install/<packagename>` (e.g. `cuda-jit/install/chroma`)
+
+There is a `build_all.sh` package which should build the packages in order. 
+
+### Running the Code
+The general recommendation is to symbolic link from the build. I.e. to run Chroma:
+```bash$
+ cd RUNDIR;
+ ln -s PACKAGE_DIR/cuda-jit/env.sh .
+ ln -s PACKAGE_DIR/cuda-jit/install/chroma/bin/chroma .
+ ```
+ where `RUNDIR` is the direcotry where you will be running, and `PACKAGE_DIR` is the top of this repository (containing the `cuda-jit` and `src` directories).
+ 

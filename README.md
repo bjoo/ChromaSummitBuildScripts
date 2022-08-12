@@ -56,3 +56,4 @@ The general recommendation is to symbolic link from the build. I.e. to run Chrom
  ```
  where `RUNDIR` is the directory where you will be running, and `PACKAGE_DIR` is the top of this repository (containing the `cuda-jit` and `src` directories).
  
+Batch scripts for runnign, should always begin by first sourcing `env.sh` (to load the same modules as for building and to set the `LD_LIBRARY_PATH`).

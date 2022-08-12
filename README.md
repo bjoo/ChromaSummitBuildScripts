@@ -2,15 +2,19 @@
 
 ## Introduction
 
-This is a list of scripts I use to build Chroma on summit with QDP-JIT and QUDA
-The scripts are all in the `cuda-jit/` directory, whereas the sources need to go to the `src/` directory. 
+This is a list of scripts I use to build Chroma on Summit.
+The general layout of the package is that there is a source directory: `src` where the source direcotries needed will live.
+Then there are various architecture specific directories e.g.
+ * `cuda-jit` -- build code for CUDA and use QDP-JIT
+ * `cuda`     -- build code for CUDA, but do not use QDP-JIT (coming soon) 
 
 ### Preliminaries
  * First, get the sources. The `populate.sh` script helps with that. 
  ```bash$
     cd src; ./populate.sh; cd ..
  ```
- * We need to change the toplevel directory in the `cuda-jit/env.sh` file.
+ * We need to change the toplevel directory in the `env.sh` file for the build we want to do. E.g. for a QDP-JIT based build
+ this would be the `cuda-jit/env.sh` file.
  ```bash$
     cd cuda-jit
  ```
@@ -28,7 +32,8 @@ bsub -nnodes 1 -P <ProjectID> -W90 -Is /bin/bash
 ```
 This should grab an interactive node for 90 minutes. The `<ProjectID>` here needs to be the allocated Project ID.
  
-### Building the Code
+### Building the Code using QDP-JIT
+
 In the `cuda-jit` directory are a variety of scripts. Essentially there is a script for building each software component which are in order...
  * `env.sh` -- sets up the build environmnent (CUDA modules, Ninja build system etc. and sets the LD_LIBRARY_PATH to the to-be installed codes)
  * `build_qmp.sh` -- builds QMP
@@ -46,7 +51,13 @@ The packages be installed in `cuda-jit/install/<packagename>` (e.g. `cuda-jit/in
 
 If alternate build-directories are required, these can be customized in the `env.sh` script by setting the `BUILDROOT` and `INSTALLROOT` variables.
 
+### Building the code without QDP-JIT
 
+The build steps here are identical to the QDP-JIT build with following hanges:
+ * There is no need to build LLVM
+ * The QDPXX package we use is not the JIT package
+ * The build takes place in the `cuda` architecture specific build directory
+ 
 ### Running the Code
 The general recommendation is to symbolic link from the build. I.e. to run Chroma:
 ```bash$
@@ -54,6 +65,6 @@ The general recommendation is to symbolic link from the build. I.e. to run Chrom
  ln -s PACKAGE_DIR/cuda-jit/env.sh .
  ln -s PACKAGE_DIR/cuda-jit/install/chroma/bin/chroma .
  ```
- where `RUNDIR` is the directory where you will be running, and `PACKAGE_DIR` is the top of this repository (containing the `cuda-jit` and `src` directories).
+ where `RUNDIR` is the directory where you will be running, and `PACKAGE_DIR` is the top of this repository (containing the `cuda-jit` and `src` directories). As usual, please replace `cuda-jit` with the appropriate architecture dependent directory (e.g. `cuda`)
  
-Batch scripts for runnign, should always begin by first sourcing `env.sh` (to load the same modules as for building and to set the `LD_LIBRARY_PATH`).
+Batch scripts for running, should always begin by first sourcing `env.sh` (to load the same modules as for building and to set the `LD_LIBRARY_PATH`).
